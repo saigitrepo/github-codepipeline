@@ -5,12 +5,12 @@ Description: github-codepipeline
 Parameters:
   # *** This value must always be passed in when creating / updating stack
   # "NoEcho" is set to true, for security, so token won't be visible when examining the resulting stack
-  GitHubOAuthToken:
-    Type: String
-    NoEcho: true
-    MinLength: 40
-    MaxLength: 40
-    AllowedPattern: '[a-z0-9]*'
+  #GitHubOAuthToken:
+  #  Type: String
+  #  NoEcho: true
+  #  MinLength: 40
+  #  MaxLength: 40
+  #  AllowedPattern: '[a-z0-9]*'
 
   # *** The remaining parameters should either be:
   # - overridden via changing "Default" here (PREFERABLE, since then they're in source control)
@@ -19,7 +19,7 @@ Parameters:
   # *** The owner of the Github repo for this application.
   GitHubOwner:
     Type: String
-    Default: symphoniacloud
+    Default: saigitrepo
     AllowedPattern: "[A-Za-z0-9-]+"
 
   GitHubRepo:
@@ -70,7 +70,7 @@ Resources:
             Repo: !Ref GitHubRepo
             Branch: !Ref GitHubBranch
             PollForSourceChanges: false
-            OAuthToken: !Ref GitHubOAuthToken
+            OAuthToken: '{{resolve:secretsmanager:mygitsecret:SecretString:mygittoken}}'
           RunOrder: 1
       # Build and Deploy, etc., stages would follow. Here is an example
       - Name: Deploy
@@ -99,7 +99,7 @@ Resources:
     Properties:
       Authentication: GITHUB_HMAC
       AuthenticationConfiguration:
-        SecretToken: !Ref GitHubOAuthToken
+        SecretToken: '{{resolve:secretsmanager:mygitsecret:SecretString:mygittoken}}'
       RegisterWithThirdParty: 'true'
       Filters:
       - JsonPath: "$.ref"

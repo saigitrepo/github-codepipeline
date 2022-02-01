@@ -7,3 +7,5 @@ Description: github-codepipeline-app
 Resources:
   ApplicationBucket:
     Type: AWS::S3::Bucket
+  DBBucket:
+    Type: AWS::S3::Bucket
