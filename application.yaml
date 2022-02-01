@@ -15,5 +15,4 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       AccessControl: Private
-      BucketName: oracle-logs
-
+      BucketName: logfiles
