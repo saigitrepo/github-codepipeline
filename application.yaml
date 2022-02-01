@@ -16,3 +16,5 @@ Resources:
     Properties:
       AccessControl: Private
       BucketName: peddineni-log-files
+      PublicAccessBlockConfiguration:
+        RestrictPublicBuckets: TRUE
