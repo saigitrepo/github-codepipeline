@@ -9,3 +9,11 @@ Resources:
     Type: AWS::S3::Bucket
   DBBucket:
     Type: AWS::S3::Bucket
+    Properties:
+      AccessControl:Private
+  NewBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl:Private
+      BucketName:oracle-logs
+      
